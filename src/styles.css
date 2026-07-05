@@ -1,0 +1,604 @@
+/* styles.css: the one stylesheet for Le Levain.
+   Comments label where each graded visual-design idea is applied:
+   COLOR THEME · TYPOGRAPHY · LAYOUT/NEGATIVE SPACE · CONTRAST · SCALE ·
+   VISUAL HIERARCHY · GESTALT (similarity, proximity). */
+
+/* ---- COLOR THEME: 4 colours total, used consistently site-wide ----
+   --cream  warm background everywhere (paper / flour dust)
+   --crust  primary brown: brand, headings, filled shapes
+   --rye    near-black brown: body text (CONTRAST ~12:1 on cream)
+   --ember  terracotta accent: reserved for calls to action + live status,
+            so one colour always means "act / happening now"
+   --wheat  a light tint of crust used only as card-art backing            */
+:root {
+  --cream: #faf4ea;
+  --crust: #7a4a2b;
+  --rye: #33261d;
+  --ember: #bc4b23;
+  --wheat: #f0e2cb;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* TYPOGRAPHY: Inter for everything readable... */
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--rye);
+  font-family: 'Inter', system-ui, sans-serif;
+  line-height: 1.55;
+}
+
+/* ...and Fraunces only where we want the eye to stop (brand, headings,
+   promo). Two fonts, no more. */
+h1,
+h2,
+h3,
+h4,
+.brand-name,
+.promo-banner {
+  font-family: 'Fraunces', Georgia, serif;
+  color: var(--crust);
+  line-height: 1.2;
+}
+
+/* LAYOUT / NEGATIVE SPACE: one centered column with wide side margins;
+   sections breathe instead of touching. */
+.site {
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+main {
+  min-height: 60vh;
+  padding-bottom: 64px;
+}
+
+/* ---------- header ---------- */
+.site-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 24px 0 16px;
+  border-bottom: 2px solid var(--wheat);
+}
+
+.brand {
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  padding: 0;
+}
+
+.brand-name {
+  display: block;
+  font-size: 1.9rem;
+  font-weight: 700;
+  color: var(--crust);
+}
+
+.brand-tag {
+  display: block;
+  font-size: 0.8rem;
+  color: var(--rye);
+  opacity: 0.75;
+}
+
+.nav-link {
+  background: none;
+  border: none;
+  font: inherit;
+  font-weight: 500;
+  color: var(--rye);
+  cursor: pointer;
+  padding: 8px 14px;
+  border-radius: 8px;
+}
+
+.nav-link.active {
+  background: var(--wheat);
+}
+
+/* Cart button in the accent colour: VISUAL HIERARCHY, the one action the
+   whole site funnels toward is always the most visible control. */
+.cart-link {
+  background: var(--ember);
+  color: var(--cream);
+  font-weight: 600;
+}
+
+/* CONTRAST + "incite to action": the promo banner is the only ember-filled
+   band on the page, so attention lands on the deal first. */
+.promo-banner {
+  background: var(--ember);
+  color: var(--cream);
+  text-align: center;
+  padding: 10px 16px;
+  border-radius: 10px;
+  margin: 16px 0 0;
+  font-size: 1.05rem;
+}
+
+/* ---------- hero ---------- */
+/* SCALE: the hero h1 is the largest element on the site, a clear entry point. */
+.hero {
+  padding: 44px 0 12px;
+  max-width: 640px;
+}
+
+.hero h1 {
+  font-size: 2.6rem;
+  margin: 0 0 10px;
+}
+
+.hero p {
+  margin: 0;
+  font-size: 1.05rem;
+}
+
+/* ---------- shop layout ---------- */
+/* NEGATIVE SPACE: 48px gutter keeps the facet rail clearly separate from
+   the product grid without drawing a border. */
+.shop {
+  display: grid;
+  grid-template-columns: 210px 1fr;
+  gap: 48px;
+  padding-top: 24px;
+}
+
+/* GESTALT, PROXIMITY: options sit tight under their facet heading; 28px of
+   space between groups makes the three facets read as three units. */
+.facet-group {
+  border: none;
+  padding: 0;
+  margin: 0 0 28px;
+}
+
+.facet-group legend {
+  font-weight: 600;
+  color: var(--crust);
+  padding: 0;
+  margin-bottom: 8px;
+}
+
+.facet-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 0;
+  cursor: pointer;
+}
+
+.facet-option input {
+  accent-color: var(--ember);
+}
+
+.results-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.result-count {
+  margin: 0;
+  font-weight: 600;
+}
+
+.active-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  background: var(--wheat);
+  border: 1px solid var(--crust);
+  color: var(--rye);
+  border-radius: 999px;
+  padding: 4px 12px;
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.clear-all {
+  background: none;
+  border: none;
+  color: var(--ember);
+  font: inherit;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* GESTALT, SIMILARITY: every card shares the same size, radius, padding and
+   internal order, so 12 items read as one product family. */
+.grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(215px, 1fr));
+  gap: 24px;
+}
+
+.card {
+  background: #fff;
+  border: 1px solid var(--wheat);
+  border-radius: 12px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.card .art {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.card h3 {
+  margin: 4px 0 0;
+  font-size: 1.05rem;
+}
+
+.card .desc {
+  margin: 0;
+  font-size: 0.85rem;
+  opacity: 0.85;
+  flex-grow: 1;
+}
+
+.card-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.price {
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+
+.badge {
+  font-size: 0.72rem;
+  background: var(--wheat);
+  color: var(--crust);
+  font-weight: 600;
+  border-radius: 999px;
+  padding: 3px 10px;
+}
+
+/* ---------- buttons ---------- */
+.btn {
+  background: var(--ember);
+  color: var(--cream);
+  border: none;
+  border-radius: 8px;
+  padding: 10px 18px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.btn.secondary {
+  background: none;
+  color: var(--crust);
+  border: 1.5px solid var(--crust);
+}
+
+.btn-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.btn-row.center {
+  justify-content: center;
+}
+
+.link-btn {
+  background: none;
+  border: none;
+  color: var(--ember);
+  font: inherit;
+  font-size: 0.85rem;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+/* ---------- founder's note ---------- */
+.founder-note {
+  margin-top: 48px;
+  background: var(--wheat);
+  border-radius: 12px;
+  padding: 20px 24px;
+  max-width: 560px;
+}
+
+.founder-note h3 {
+  margin: 0 0 8px;
+}
+
+.founder-note p {
+  margin: 0;
+  font-style: italic;
+}
+
+.founder-note .founder-sign {
+  margin-top: 8px;
+  font-style: normal;
+  font-weight: 600;
+  color: var(--crust);
+}
+
+/* ---------- checkout ---------- */
+.panel {
+  padding-top: 32px;
+}
+
+.narrow {
+  max-width: 560px;
+}
+
+.center {
+  text-align: center;
+  margin: 0 auto;
+}
+
+/* Step indicator: done = filled crust + ✓, current = ember (the "now"
+   colour), todo = outline only. Status is readable at a glance. */
+.steps {
+  list-style: none;
+  display: flex;
+  gap: 8px;
+  padding: 0;
+  margin: 0 0 36px;
+}
+
+.steps li {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+}
+
+.step-dot {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  flex-shrink: 0;
+  border: 2px solid var(--crust);
+  color: var(--crust);
+  background: transparent;
+}
+
+.steps li.done .step-dot {
+  background: var(--crust);
+  border-color: var(--crust);
+  color: var(--cream);
+}
+
+.steps li.current .step-dot {
+  background: var(--ember);
+  border-color: var(--ember);
+  color: var(--cream);
+}
+
+.steps li.todo {
+  opacity: 0.45;
+}
+
+.steps li.current .step-name {
+  font-weight: 700;
+  color: var(--ember);
+}
+
+/* ---------- cart lines ---------- */
+.cart-lines {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.cart-line {
+  display: grid;
+  grid-template-columns: 1fr auto auto auto;
+  gap: 14px;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--wheat);
+}
+
+.qty-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.qty-controls button {
+  width: 26px;
+  height: 26px;
+  border-radius: 6px;
+  border: 1.5px solid var(--crust);
+  background: none;
+  color: var(--crust);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.qty-controls button:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.subtotal {
+  text-align: right;
+  font-size: 1.1rem;
+  margin-top: 16px;
+}
+
+/* ---------- forms ---------- */
+.field {
+  display: block;
+  margin-bottom: 14px;
+}
+
+.field-label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 4px;
+}
+
+.field input,
+textarea {
+  width: 100%;
+  padding: 9px 12px;
+  border: 1.5px solid var(--crust);
+  border-radius: 8px;
+  font: inherit;
+  background: #fff;
+  color: var(--rye);
+}
+
+.field input[aria-invalid='true'] {
+  border-color: var(--ember);
+}
+
+.field-pair {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.error {
+  display: block;
+  color: var(--ember);
+  font-size: 0.85rem;
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+.reassure {
+  background: var(--wheat);
+  border-radius: 8px;
+  padding: 10px 14px;
+  font-size: 0.9rem;
+}
+
+.empty-msg {
+  opacity: 0.8;
+}
+
+/* ---------- survey ---------- */
+.survey-q {
+  border: none;
+  padding: 0;
+  margin: 0 0 26px;
+}
+
+.survey-q legend {
+  font-weight: 600;
+  color: var(--crust);
+  padding: 0;
+  margin-bottom: 10px;
+}
+
+.rating-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.rating {
+  width: 40px;
+  height: 40px;
+  border: 1.5px solid var(--crust);
+  border-radius: 8px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.rating input {
+  position: absolute;
+  opacity: 0;
+}
+
+.rating.on {
+  background: var(--ember);
+  border-color: var(--ember);
+  color: var(--cream);
+}
+
+.rating-hint {
+  font-size: 0.78rem;
+  opacity: 0.7;
+}
+
+/* ---------- footer ---------- */
+.site-footer {
+  border-top: 2px solid var(--wheat);
+  padding: 32px 0 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+.foot-block h4 {
+  margin: 0 0 8px;
+}
+
+.foot-block p {
+  margin: 0 0 6px;
+  font-size: 0.9rem;
+}
+
+.foot-copy {
+  grid-column: 1 / -1;
+  font-size: 0.8rem;
+  opacity: 0.6;
+  margin: 8px 0 0;
+}
+
+/* ---------- small screens ---------- */
+@media (max-width: 760px) {
+  .shop {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+
+  .site-footer {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .steps .step-name {
+    display: none;
+  }
+
+  .steps li.current .step-name {
+    display: inline;
+  }
+}
