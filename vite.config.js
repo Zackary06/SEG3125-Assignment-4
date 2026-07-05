@@ -5,6 +5,10 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   base: './',
   plugins: [react()],
+  build: {
+    // build into docs/ so GitHub Pages can serve straight from the main branch
+    outDir: 'docs',
+  },
   server: {
     port: Number(process.env.PORT) || 5173,
   },
